@@ -81,9 +81,12 @@ class App extends Component {
     const accounts = await web3.eth.getAccounts()
     
     //***TODO: Grab deployed contract address from commandline */
-    const tutorialInstance = new web3.eth.Contract(NFToken.abi,'0xf715994bd665da9187c259d4a300623fd3ed7ce3')
-    
+    const tutorialInstance = new web3.eth.Contract(NFToken.abi,'0xc388ae2279d542450a4187918c35d9053f89b95b')
+    console.log(tutorialInstance)
+
     let token_array = []
+
+    this.setState({ contractInstance: tutorialInstance })
 
     tutorialInstance.methods.myTokens().call({ from: accounts[0] }).then((result) => {
 
@@ -95,13 +98,12 @@ class App extends Component {
           token_array.push({id:result[0], title: result.tokenTitle_, type: result.tokenType_ })
           // console.log(token_array)
 
-          this.setState({ contractInstance: tutorialInstance, tokenList:token_array })
+          this.setState({ tokenList:token_array })
         })
       }
 
     })
-    
-      // 
+     
     
 
   }
@@ -115,6 +117,7 @@ class App extends Component {
     .then((result) => {
 
       console.log(result)
+      this.getTokens(web3)
 
     })
   }
@@ -159,7 +162,7 @@ class App extends Component {
         
             <Row>
               <Col><Button color="primary" onClick={()=>this.purchaseToken(1, "Cryptokitty")}>Buy Token 1</Button></Col>
-              <Col><Button color="positive" onClick={()=>this.purchaseToken(2, "Cryptopuppy")}>Buy Token 2</Button></Col>
+              <Col><Button color="info" onClick={()=>this.purchaseToken(2, "Cryptopuppy")}>Buy Token 2</Button></Col>
               
             </Row>
             </Container>
