@@ -1,7 +1,7 @@
 pragma solidity ^0.4.23;
 
-import 'zeppelin-solidity/contracts/ownership/Ownable.sol';
-import 'zeppelin-solidity/contracts/token/ERC721/ERC721Token.sol';
+import 'openzeppelin-solidity/contracts/ownership/Ownable.sol';
+import 'openzeppelin-solidity/contracts/token/ERC721/ERC721Token.sol';
 
 contract NFToken is ERC721Token, Ownable {
 
@@ -16,17 +16,18 @@ contract NFToken is ERC721Token, Ownable {
   /*** DATA TYPES ***/
 
   /// Price set by contract owner for each token in Wei.
-  /// @dev If you'd like a different price for each token type, you will
-  ///   need to use a mapping like: `mapping(uint256 => uint256) tokenTypePrices;`
   uint256 currentPrice = 3000000000000000;
 
-  /// The token type (1 for shield, 2 for sword, etc)
+  /// The token type (e.g. 1 for shield, 2 for sword)
   mapping(uint256 => uint256) tokenTypes;
 
   /// The title of the token
   mapping(uint256 => string) tokenTitles;
 
-  constructor() ERC721Token("Etherplate NFToken", "ENFT") public {
+  // TODO: Add a new token characteristic of Score
+
+  // TODO: Choose a token symbol!
+  constructor() ERC721Token("TechBeach GameNFT", "XXX") public {
     // any init code when you deploy the contract would run here
   }
 
@@ -42,16 +43,16 @@ contract NFToken is ERC721Token, Ownable {
     require(_titleBytes.length >= TITLE_MIN_LENGTH, "Title is too short");
     require(_titleBytes.length <= TITLE_MAX_LENGTH, "Title is too long");
 
-    require(msg.value >= currentPrice, "Amount of Ether sent too small");
+    // TODO: Check that the _type is valid
+
+    // TODO: Check that the correct price has been sent
 
     uint256 index = allTokens.length + 1;
-
     _mint(msg.sender, index);
 
-    tokenTypes[index] = _type;
-    tokenTitles[index] = _title;
+    // TODO: Store some details about the token (type, title, score)
 
-    emit BoughtToken(msg.sender, index);
+    // TODO: Emit an event so the dApp can react to the purchase
   }
 
   /**
@@ -77,6 +78,7 @@ contract NFToken is ERC721Token, Ownable {
       uint256 tokenType_,
       string tokenTitle_
   ) {
+      // TODO: Add Token Score to the details returned
       tokenType_ = tokenTypes[_tokenId];
       tokenTitle_ = tokenTitles[_tokenId];
   }
@@ -96,6 +98,7 @@ contract NFToken is ERC721Token, Ownable {
     returns (
     uint256 price
   ) {
+      // TODO: Make the price increase over time - encourage FOMO ;-)
       price = currentPrice;
   }
 
