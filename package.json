@@ -7,7 +7,7 @@
     "openzeppelin-solidity": "2.1.1"
   },
   "scripts": {
-    "install": "cd frontend && yarn",
+    "start": "cd frontend && yarn",
     "build": "cd frontend && yarn build"
   }
 }
