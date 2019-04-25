@@ -29,7 +29,7 @@ contract NFToken is ERC721Full, Ownable {
   // TODO: Add a new token characteristic of Score
 
   // TODO: Choose a token symbol!
-  constructor() ERC721Full("UWI GameNFT", "UWI") public {
+  constructor() ERC721Full("Tutorial NFT", "UWI") public {
     // any init code when you deploy the contract would run here
   }
 
