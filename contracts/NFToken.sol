@@ -46,18 +46,14 @@ contract NFToken is ERC721Full, Ownable {
     require(_titleBytes.length <= TITLE_MAX_LENGTH, "Title is too long");
 
     // TODO: Check that the _type is valid
-    // require(_type >= 0 && _type <= 15);
 
     // TODO: Check that the correct price has been sent
-    // require(msg.value >= currentPrice, "Amount of Ether sent too small");
 
     
-
     uint256 index = totalSupply().add(1);
     _mint(msg.sender, index);
 
     // TODO: Store some details about the token (type, title, score)
-    // tokenTypes[index] = _type;
     tokenTitles[index] = _title;
 
     // TODO: Emit an event so the dApp can react to the purchase

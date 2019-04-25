@@ -1,0 +1,24 @@
+language: node_js
+node_js:
+  - node
+cache:
+  yarn: true
+  directories:
+    - node_modules
+branches:
+  only:
+    - master
+script:
+  - npm test
+env:
+  - CI=true
+
+before_deploy:
+  - npm install
+  - npm run build
+
+deploy:
+  - provider: heroku
+    local_dir: frontend/build
+    api_key: $HEROKU_API_KEY
+    app: erc721-dapp
