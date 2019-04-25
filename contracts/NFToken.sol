@@ -1,9 +1,11 @@
-pragma solidity ^0.4.23;
+pragma solidity ^0.5.0;
 
 import 'openzeppelin-solidity/contracts/ownership/Ownable.sol';
-import 'openzeppelin-solidity/contracts/token/ERC721/ERC721Token.sol';
+// import 'openzeppelin-solidity/contracts/token/ERC721/ERC721Token.sol';
+import 'openzeppelin-solidity/contracts/token/ERC721/ERC721Full.sol';
 
-contract NFToken is ERC721Token, Ownable {
+
+contract NFToken is ERC721Full, Ownable {
 
   /*** EVENTS ***/
   /// The event emitted (useable by web3) when a token is purchased
@@ -27,30 +29,36 @@ contract NFToken is ERC721Token, Ownable {
   // TODO: Add a new token characteristic of Score
 
   // TODO: Choose a token symbol!
-  constructor() ERC721Token("TechBeach GameNFT", "XXX") public {
+  constructor() ERC721Full("UWI GameNFT", "UWI") public {
     // any init code when you deploy the contract would run here
   }
 
   /// Requires the amount of Ether be at least or more of the currentPrice
   /// @dev Creates an instance of an token and mints it to the purchaser
-  /// @param _type The token type as an integer
+  // / @param _type The token type as an integer
   /// @param _title The short title of the token
   function buyToken (
-    uint256 _type,
-    string _title
+    // uint256 _type,
+    string calldata _title
   ) external payable {
     bytes memory _titleBytes = bytes(_title);
     require(_titleBytes.length >= TITLE_MIN_LENGTH, "Title is too short");
     require(_titleBytes.length <= TITLE_MAX_LENGTH, "Title is too long");
 
     // TODO: Check that the _type is valid
+    // require(_type >= 0 && _type <= 15);
 
     // TODO: Check that the correct price has been sent
+    // require(msg.value >= currentPrice, "Amount of Ether sent too small");
 
-    uint256 index = allTokens.length + 1;
+    
+
+    uint256 index = totalSupply().add(1);
     _mint(msg.sender, index);
 
     // TODO: Store some details about the token (type, title, score)
+    // tokenTypes[index] = _type;
+    tokenTitles[index] = _title;
 
     // TODO: Emit an event so the dApp can react to the purchase
   }
@@ -63,10 +71,10 @@ contract NFToken is ERC721Token, Ownable {
     external
     view
     returns (
-      uint256[]
+      uint256
     )
   {
-    return ownedTokens[msg.sender];
+    return balanceOf(msg.sender);
   }
 
   /// @notice Returns all the relevant information about a specific token
@@ -76,7 +84,7 @@ contract NFToken is ERC721Token, Ownable {
     view
     returns (
       uint256 tokenType_,
-      string tokenTitle_
+      string memory tokenTitle_
   ) {
       // TODO: Add Token Score to the details returned
       tokenType_ = tokenTypes[_tokenId];
