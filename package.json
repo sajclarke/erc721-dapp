@@ -8,6 +8,6 @@
   },
   "scripts": {
     "start": "cd frontend && npm install",
-    "build": "cd frontend && npm run build"
+    "build": "cd frontend && CI=false npm run build"
   }
 }
