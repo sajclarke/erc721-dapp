@@ -80,8 +80,7 @@ class App extends Component {
     //***TODO: Grab deployed contract address from commandline */
     const tutorialInstance = new web3.eth.Contract(
       NFToken.abi,
-      "0x517515480da14898759591900f5093b169a65ddc"
-      // "0xC9BC7bFdA71E39807bbA554628e4342A23554030"
+      "0xF1eBd73f202Df2b2dA08915e365FFCc61561BCc0"
     );
     console.log(tutorialInstance);
 
@@ -168,6 +167,7 @@ class App extends Component {
               <Row>
                 <Col>
                   <Button
+                    id="buy-token-1"
                     color="primary"
                     onClick={() => this.purchaseToken(1, "Cryptokitty")}
                   >
@@ -176,6 +176,7 @@ class App extends Component {
                 </Col>
                 <Col>
                   <Button
+                    id="buy-token-2"
                     color="info"
                     onClick={() => this.purchaseToken(2, "Cryptopuppy")}
                   >

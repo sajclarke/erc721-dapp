@@ -4,7 +4,8 @@
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
-    "openzeppelin-solidity": "2.1.1"
+    "openzeppelin-solidity": "2.1.1",
+    "truffle-hdwallet-provider": "^1.0.8"
   },
   "scripts": {
     "start": "cd frontend && npm install",
