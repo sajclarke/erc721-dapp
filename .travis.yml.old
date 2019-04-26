@@ -1,11 +1,21 @@
 language: node_js
 node_js:
-  - "stable"
+  - node
 cache:
+  yarn: true
   directories:
     - node_modules
+branches:
+  only:
+    - master
 script:
   - npm test
+env:
+  - CI=true
+sudo: required
+before_install:
+  - npm install -g node-gyp
+before_deploy:
   - npm start
   - npm run build
 
