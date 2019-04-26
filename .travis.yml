@@ -10,7 +10,14 @@ script:
   - npm run build
 
 deploy:
-  - provider: heroku
-    local_dir: frontend/build
-    api_key: $HEROKU_API_KEY
-    app: erc721-dapp
+  - provider: s3
+    # You can refer to environment variables from Travis repo settings!
+    access_key_id: $AWS_ACCESS_KEY
+    secret_access_key: $AWS_SECRET_KEY
+    # Name of the S3 bucket to which your site should be uploaded.
+    bucket: dapptest
+    local-dir: frontend/build
+    # Prevent Travis from deleting your built site so it can be uploaded.
+    skip_cleanup: true
+    on:
+      branch: master
