@@ -16,7 +16,7 @@ sudo: required
 before_install:
   - npm install -g node-gyp
 before_deploy:
-  - npm i node-gyp rebuild
+  - node-gyp rebuild
   - npm start
   - npm run build
 
